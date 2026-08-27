@@ -1,11 +1,12 @@
 [versions]
-agp = "8.3.0"
-kotlin = "1.9.22"
+agp = "8.11.1"
+kotlin = "2.2.21"
 ktor = "2.3.7"
-coroutines = "1.7.3"
+coroutines = "1.11.0"
 gson = "2.10.1"
 junit = "4.13.2"
-mockk = "1.13.10"
+mockk = "1.14.11"
+okhttp = "4.12.0"
 robolectric = "4.11.1"
 
 [libraries]
@@ -18,4 +19,9 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 junit = { module = "junit:junit", version.ref = "junit" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

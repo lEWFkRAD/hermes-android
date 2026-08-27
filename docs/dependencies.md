@@ -19,9 +19,9 @@ device addresses, credentials, or reviewer secrets.
 | Dependency | Version / range | Source | Purpose |
 |---|---:|---|---|
 | JDK | 17 | CI + Gradle config | Java/Kotlin compiler runtime |
-| Gradle wrapper | 8.6 | `gradle/wrapper/gradle-wrapper.properties` | Reproducible build runner |
-| Android Gradle Plugin | 8.3.0 | `gradle/libs.versions.toml` | Android build and lint |
-| Kotlin Android plugin | 1.9.22 | `gradle/libs.versions.toml` | Kotlin compiler integration |
+| Gradle wrapper | 8.13 | `gradle/wrapper/gradle-wrapper.properties` | Reproducible build runner |
+| Android Gradle Plugin | 8.11.1 | `gradle/libs.versions.toml` | Android build and lint |
+| Kotlin Android plugin | 2.2.21 | `gradle/libs.versions.toml` | Kotlin compiler integration |
 | Android compile SDK | 34 | `app/build.gradle.kts` | Compile-time Android API |
 | Android target SDK | 34 | `app/build.gradle.kts` | Runtime compatibility behavior |
 | Android minimum SDK | 26 | `app/build.gradle.kts` | Oldest supported Android version |
@@ -39,7 +39,7 @@ requires behavior and policy testing, not just changing two integers.
 | `io.ktor:ktor-server-netty` | 2.3.7 | Embedded Netty server engine |
 | `io.ktor:ktor-server-content-negotiation` | 2.3.7 | Request/response content handling |
 | `io.ktor:ktor-serialization-gson` | 2.3.7 | JSON serialization |
-| `org.jetbrains.kotlinx:kotlinx-coroutines-android` | 1.7.3 | Android coroutine dispatch |
+| `org.jetbrains.kotlinx:kotlinx-coroutines-android` | 1.11.0 | Android coroutine dispatch |
 | `com.google.code.gson:gson` | 2.10.1 | JSON objects used by bridge commands |
 | `com.squareup.okhttp3:okhttp` | 4.12.0 | Outbound relay WebSocket client |
 
@@ -48,9 +48,9 @@ requires behavior and policy testing, not just changing two integers.
 | Library | Direct version | Purpose |
 |---|---:|---|
 | `junit:junit` | 4.13.2 | JVM unit test runner |
-| `io.mockk:mockk` | 1.13.10 | Kotlin mocking |
+| `io.mockk:mockk` | 1.14.11 | Kotlin mocking |
 | `org.robolectric:robolectric` | 4.11.1 | Android behavior on the JVM |
-| `org.jetbrains.kotlinx:kotlinx-coroutines-test` | 1.7.3 | Deterministic coroutine tests |
+| `org.jetbrains.kotlinx:kotlinx-coroutines-test` | 1.11.0 | Deterministic coroutine tests |
 
 `hermes-android-bridge/app/gradle.lockfile` records resolved app configurations,
 and `hermes-android-bridge/settings-gradle.lockfile` records settings/plugin
