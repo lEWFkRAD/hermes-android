@@ -5,7 +5,7 @@ ktor = "2.3.7"
 coroutines = "1.7.3"
 gson = "2.10.1"
 junit = "4.13.2"
-mockk = "1.13.10"
+mockk = "1.14.11"
 robolectric = "4.11.1"
 
 [libraries]
