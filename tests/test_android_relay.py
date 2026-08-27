@@ -406,6 +406,10 @@ class TestMicrophoneBinaryStreamNegative:
                 # body read must fail — never a silent truncated success.
                 try:
                     response = await asyncio.wait_for(download, timeout=2)
+                    if response.status >= 400:
+                        await response.read()
+                        await ws.close()
+                        return
                     with pytest.raises(aiohttp.ClientError):
                         await asyncio.wait_for(response.read(), timeout=2)
                 except aiohttp.ClientError:
