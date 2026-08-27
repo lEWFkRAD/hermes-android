@@ -1,0 +1,5 @@
+name: hermes-android
+version: 0.5.1
+description: "Remote Android control and user-authorized USB/OTG peripheral access through Hermes Bridge"
+author: raulvidis
+requires_env: []

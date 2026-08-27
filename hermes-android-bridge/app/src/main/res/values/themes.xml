@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.HermesBridge" parent="android:Theme.Material.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowBackground">@drawable/bg_circuit_pattern</item>
+        <item name="android:statusBarColor">@color/liquid_canvas_top</item>
+        <item name="android:navigationBarColor">@color/liquid_canvas_bottom</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:colorAccent">@color/glass_accent</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+</resources>

@@ -1,0 +1,35 @@
+name: Feature request
+description: Propose a bridge, tool, USB, privacy, or reliability improvement.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What owner-authorized use case is currently difficult or impossible?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Explain the desired user flow and permission boundary.
+    validations:
+      required: true
+  - type: textarea
+    id: security
+    attributes:
+      label: Security, privacy, and store impact
+      description: Identify data accessed, permissions needed, destructive actions, and public-store implications.
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope checks
+      options:
+        - label: The feature operates only on devices the user owns or is authorized to control.
+          required: true
+        - label: The request contains no credentials, private addresses, screenshots, recordings, or personal device data.
+          required: true

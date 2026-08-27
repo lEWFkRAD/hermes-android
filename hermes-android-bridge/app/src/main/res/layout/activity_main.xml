@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_circuit_pattern"
+    android:clipToPadding="false"
+    android:overScrollMode="never"
+    android:scrollbars="none"
+    android:fillViewport="true">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Hermes Bridge"
+            android:textSize="30sp"
+            android:textColor="@color/glass_text_primary"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="-0.01"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/glass_text_secondary"
+            android:fontFamily="sans-serif-medium"
+            android:background="@drawable/bg_glass_pill" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/bg_glass_divider"
+        android:layout_marginBottom="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_card_rounded"
+            android:elevation="8dp"
+            android:outlineProvider="background"
+        android:padding="18dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status"
+            android:textSize="13sp"
+            android:textColor="@color/glass_accent"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="6dp">
+
+            <View
+                android:id="@+id/indicatorA11y"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/bg_status_dot_green" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Accessibility"
+                android:layout_marginStart="10dp"
+                android:textSize="13sp"
+                android:textColor="@color/glass_text_tertiary"
+                android:fontFamily="sans-serif" />
+
+            <TextView
+                android:id="@+id/tvA11yStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="active"
+                android:textSize="13sp"
+                android:textColor="@color/glass_success"
+                android:fontFamily="sans-serif"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="6dp">
+
+            <View
+                android:id="@+id/indicatorServer"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/bg_status_dot_green" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Local server"
+                android:layout_marginStart="10dp"
+                android:textSize="13sp"
+                android:textColor="@color/glass_text_tertiary"
+                android:fontFamily="sans-serif" />
+
+            <TextView
+                android:id="@+id/tvServerStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="8765"
+                android:textSize="13sp"
+                android:textColor="@color/glass_success"
+                android:fontFamily="sans-serif"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="6dp">
+
+            <View
+                android:id="@+id/indicatorRelay"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/bg_status_dot_green" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Relay"
+                android:layout_marginStart="10dp"
+                android:textSize="13sp"
+                android:textColor="@color/glass_text_tertiary"
+                android:fontFamily="sans-serif" />
+
+            <TextView
+                android:id="@+id/tvRelayAddr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="—"
+                android:textSize="13sp"
+                android:textColor="@color/glass_success"
+                android:fontFamily="sans-serif"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <View
+                android:id="@+id/indicatorAuth"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/bg_status_dot_green" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Secure key"
+                android:layout_marginStart="10dp"
+                android:textSize="13sp"
+                android:textColor="@color/glass_text_tertiary"
+                android:fontFamily="sans-serif" />
+
+            <TextView
+                android:id="@+id/tvAuthCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="------"
+                android:textSize="13sp"
+                android:textColor="@color/glass_success"
+                android:fontFamily="sans-serif"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_card_rounded"
+            android:elevation="8dp"
+            android:outlineProvider="background"
+        android:padding="18dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Permissions"
+            android:textSize="13sp"
+            android:textColor="@color/glass_accent"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Accessibility control"
+                android:textSize="13sp"
+                android:textColor="@color/glass_text_secondary"
+                android:fontFamily="sans-serif" />
+
+            <Switch
+                android:id="@+id/switchAccessibility"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:track="@drawable/bg_switch_track"
+                android:thumb="@drawable/bg_switch_thumb" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Floating status"
+                android:textSize="13sp"
+                android:textColor="@color/glass_text_secondary"
+                android:fontFamily="sans-serif" />
+
+            <Switch
+                android:id="@+id/switchOverlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:track="@drawable/bg_switch_track"
+                android:thumb="@drawable/bg_switch_thumb" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Screen capture"
+                android:textSize="13sp"
+                android:textColor="@color/glass_text_secondary"
+                android:fontFamily="sans-serif" />
+
+            <Switch
+                android:id="@+id/switchScreenRecord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:track="@drawable/bg_switch_track"
+                android:thumb="@drawable/bg_switch_thumb" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvDevicePermissions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="Device permissions"
+            android:textColor="@color/glass_text_tertiary"
+            android:textSize="11sp"
+            android:fontFamily="sans-serif" />
+
+        <Button
+            android:id="@+id/btnDevicePermissions"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="8dp"
+            android:text="Grant Device Access"
+            android:textColor="@color/glass_on_accent"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_button_orange" />
+
+        <TextView
+            android:id="@+id/tvUsbStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="No USB devices · connect with USB-C OTG"
+            android:textColor="@color/glass_text_tertiary"
+            android:textSize="11sp"
+            android:fontFamily="sans-serif" />
+
+        <Button
+            android:id="@+id/btnUsbAccess"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="8dp"
+            android:text="USB Device Access"
+            android:textColor="@color/glass_on_accent"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_button_orange" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_card_rounded"
+            android:elevation="8dp"
+            android:outlineProvider="background"
+        android:padding="18dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pairing code"
+            android:textSize="13sp"
+            android:textColor="@color/glass_accent"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:id="@+id/tvPairingCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="------"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:textColor="@color/glass_text_primary"
+                android:background="@drawable/bg_code_capsule"
+                android:layout_marginEnd="12dp"
+                android:letterSpacing="0.16" />
+
+            <Button
+                android:id="@+id/btnRegenerate"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:text="New code"
+                android:textSize="12sp"
+                android:textColor="@color/glass_on_accent"
+                android:fontFamily="sans-serif-medium"
+                android:background="@drawable/bg_button_orange"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tap to copy this one-time code, then pair Hermes from your agent."
+            android:textSize="11sp"
+            android:textColor="@color/glass_text_tertiary"
+            android:fontFamily="sans-serif" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_card_rounded"
+            android:elevation="8dp"
+            android:outlineProvider="background"
+        android:padding="18dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Server connection"
+            android:textSize="13sp"
+            android:textColor="@color/glass_accent"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/etServerUrl"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="server-ip:8766"
+            android:inputType="textUri"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/glass_text_secondary"
+            android:textColorHint="@color/glass_text_tertiary"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="@drawable/bg_input_dark"
+            android:layout_marginBottom="8dp"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/tvRelayStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Not connected"
+            android:textSize="12sp"
+            android:textColor="@color/glass_text_tertiary"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginBottom="10dp" />
+
+        <Button
+            android:id="@+id/btnConnect"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Connect"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/glass_on_accent"
+            android:fontFamily="sans-serif"
+            android:background="@drawable/bg_button_orange"
+            android:textAllCaps="false" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnDisconnect"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Disconnect"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/glass_on_accent"
+        android:fontFamily="sans-serif-medium"
+        android:background="@drawable/bg_button_disconnect"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"
+        android:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="10sp"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/glass_text_tertiary"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text=""
+        android:textSize="0sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvScreenRecordStatus"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text=""
+        android:textSize="0sp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnAccessibility"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text=""
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text=""
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnScreenRecord"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text=""
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvSetupCommand"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text=""
+        android:visibility="gone" />
+
+</LinearLayout>
+</ScrollView>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="315"
+        android:startColor="#7A1D2D48"
+        android:endColor="@color/glass_input_fill" />
+    <corners android:radius="18dp" />
+    <stroke
+        android:width="1dp"
+        android:color="@color/glass_input_stroke" />
+</shape>

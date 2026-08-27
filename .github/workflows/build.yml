@@ -1,0 +1,111 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install project and development dependencies
+        run: python -m pip install --disable-pip-version-check -e ".[dev]"
+
+      - name: Check version metadata
+        run: python scripts/check_versions.py
+
+      - name: Lint
+        run: ruff check --output-format=github .
+
+      - name: Test
+        run: pytest -q
+
+      - name: Verify package build
+        run: python -m build
+
+  android:
+    name: Android unit tests, lint, and APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Validate Gradle wrapper
+        uses: gradle/actions/wrapper-validation@0723195856401067f7a2779048b490ace7a47d7c # v5
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          java-version: "17"
+          distribution: temurin
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6
+
+      - name: Test, lint, and build
+        working-directory: hermes-android-bridge
+        run: ./gradlew --no-daemon --stacktrace testDebugUnitTest lintDebug assembleDebug
+
+      - name: Create checksum
+        working-directory: hermes-android-bridge/app/build/outputs/apk/debug
+        run: sha256sum *.apk > SHA256SUMS
+
+      - name: Stage CI artifacts
+        run: |
+          mkdir -p "$RUNNER_TEMP/android-artifacts"
+          cp hermes-android-bridge/app/build/outputs/apk/debug/*.apk "$RUNNER_TEMP/android-artifacts/"
+          cp hermes-android-bridge/app/build/outputs/apk/debug/SHA256SUMS "$RUNNER_TEMP/android-artifacts/"
+          cp hermes-android-bridge/app/build/reports/lint-results-debug.html "$RUNNER_TEMP/android-artifacts/"
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: hermes-android-debug-${{ github.sha }}
+          path: ${{ runner.temp }}/android-artifacts/
+          if-no-files-found: error
+          retention-days: 14
+
+  latest-build:
+    name: Publish latest debug build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: [python, android]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: hermes-android-debug-${{ github.sha }}
+          path: dist
+
+      - name: Publish latest-build release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          if ! gh release view latest-build >/dev/null 2>&1; then
+            gh release create latest-build --title "Latest Build" --prerelease --notes "Continuous unsigned debug build. Do not use as a store release."
+          fi
+          gh release edit latest-build --title "Latest Build" --prerelease --notes "Auto-built from main at $GITHUB_SHA. This is an unsigned debug build for private testing, not a store submission."
+          gh release upload latest-build dist/*.apk dist/SHA256SUMS --clobber

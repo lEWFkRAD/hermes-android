@@ -1,0 +1,57 @@
+name: Bug report
+description: Report a reproducible bridge, tool, relay, or build failure.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include pairing codes, tokens, server addresses, screenshots,
+        recordings, contacts, messages, locations, or signing material. Use a
+        private security advisory for vulnerabilities.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What happened, and what did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      description: Use redacted or synthetic values only.
+      placeholder: |
+        1. Install version ...
+        2. Grant ...
+        3. Run ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Android/Python environment
+      description: Android API level and form factor, or Python version and OS. Do not identify the device owner.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Redacted logs
+      description: Remove credentials, addresses, screen content, and personal data before pasting.
+      render: shell
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed credentials, addresses, screenshots, recordings, and personal device data.
+          required: true
+        - label: This is not an undisclosed security vulnerability.
+          required: true

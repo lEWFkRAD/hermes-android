@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="liquid_canvas_top">#071321</color>
+    <color name="liquid_canvas_mid">#10152D</color>
+    <color name="liquid_canvas_bottom">#090B1A</color>
+
+    <color name="glass_card_fill">#7A17243A</color>
+    <color name="glass_card_stroke">#52FFFFFF</color>
+    <color name="glass_input_fill">#66142236</color>
+    <color name="glass_input_stroke">#38FFFFFF</color>
+    <color name="glass_pill_fill">#28FFFFFF</color>
+    <color name="glass_pill_stroke">#30FFFFFF</color>
+
+    <color name="glass_text_primary">#F7F9FF</color>
+    <color name="glass_text_secondary">#C2CBE0</color>
+    <color name="glass_text_tertiary">#8592AD</color>
+    <color name="glass_accent">#91B8FF</color>
+    <color name="glass_accent_secondary">#C69BFF</color>
+    <color name="glass_success">#66F4B7</color>
+    <color name="glass_warning">#FFD37C</color>
+    <color name="glass_danger">#FF809A</color>
+    <color name="glass_on_accent">#FFFFFFFF</color>
+</resources>

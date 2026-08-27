@@ -1,0 +1,109 @@
+name: Signed Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing v-prefixed tag to publish"
+        required: true
+        type: string
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: release
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install Python build dependencies
+        run: python -m pip install --disable-pip-version-check -e ".[dev]"
+
+      - name: Verify tag and metadata versions
+        env:
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          python scripts/check_versions.py
+          PROJECT_VERSION="$(python -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')"
+          test "$RELEASE_TAG" = "v$PROJECT_VERSION"
+
+      - name: Python quality gates and package
+        run: |
+          ruff check .
+          pytest -q
+          python -m build
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          java-version: "17"
+          distribution: temurin
+
+      - uses: gradle/actions/wrapper-validation@0723195856401067f7a2779048b490ace7a47d7c # v5
+
+      - uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6
+
+      - name: Require release-signing secrets
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          test -n "$ANDROID_KEYSTORE_BASE64"
+          test -n "$ANDROID_KEYSTORE_PASSWORD"
+          test -n "$ANDROID_KEY_ALIAS"
+          test -n "$ANDROID_KEY_PASSWORD"
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/hermes-release.jks"
+          chmod 600 "$RUNNER_TEMP/hermes-release.jks"
+
+      - name: Build signed APK and AAB
+        working-directory: hermes-android-bridge
+        env:
+          ANDROID_KEYSTORE_PATH: ${{ runner.temp }}/hermes-release.jks
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: ./gradlew --no-daemon --stacktrace testDebugUnitTest lintDebug assembleRelease bundleRelease
+
+      - name: Verify signatures and stage assets
+        run: |
+          mkdir -p release-assets
+          cp hermes-android-bridge/app/build/outputs/apk/release/*.apk release-assets/
+          cp hermes-android-bridge/app/build/outputs/bundle/release/*.aab release-assets/
+          cp dist/* release-assets/
+          APKSIGNER="$(find "$ANDROID_HOME/build-tools" -type f -name apksigner -print | sort -V | tail -1)"
+          test -n "$APKSIGNER"
+          "$APKSIGNER" verify --verbose --print-certs release-assets/*.apk
+          jarsigner -verify -strict release-assets/*.aab
+          cd release-assets
+          sha256sum *.apk *.aab *.whl *.tar.gz > SHA256SUMS
+
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: signed-release-${{ inputs.tag || github.ref_name }}
+          path: release-assets/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: gh release create "$RELEASE_TAG" release-assets/* --verify-tag --generate-notes --title "$RELEASE_TAG"

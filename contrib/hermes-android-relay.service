@@ -1,0 +1,24 @@
+[Unit]
+Description=Hermes Android Bridge Relay
+Documentation=https://github.com/raulvidis/hermes-android
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /opt/hermes-android/contrib/hermes-relay-daemon.py
+WorkingDirectory=/opt/hermes-android
+EnvironmentFile=-%h/.hermes/.env
+Restart=on-failure
+RestartSec=5
+StartLimitBurst=5
+StartLimitIntervalSec=60
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=%h/.hermes
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

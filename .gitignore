@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+.pytest_cache/
+
+# Virtual environments
+venv/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Android build outputs
+hermes-android-bridge/app/build/
+hermes-android-bridge/build/
+hermes-android-bridge/.gradle/
+hermes-android-bridge/local.properties
+*.apk
+*.aab
+
+# Signing material
+*.jks
+*.keystore
+*.p12
+*.pfx
+
+# Environment
+.env
+*.env.local
+
+# personal shared standards (symlinks to ../agent-repo-standards)
+.agents/skills
+.agents/AGENTS.base.md
+
+# local agent session state
+.pi/
+
+# Local UI references can contain pairing codes, server addresses, or device data.
+stitch-screens/
