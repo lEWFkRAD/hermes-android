@@ -5,6 +5,7 @@ All notable changes to this project are documented here. Format based on [Keep a
 ## [Unreleased]
 
 ### Changed
+- Modernized the Android build to Gradle 8.13, Android Gradle Plugin 8.11.1, and Kotlin 2.2.21; upgraded coroutines and MockK to compatible current releases; centralized plugin and OkHttp versions in the Gradle version catalog; and grouped routine Dependabot updates to reduce CI churn.
 - Restyled the bridge dashboard with an iOS-inspired liquid-glass visual system: translucent layered cards, luminous gradients, softer typography, pill controls, and responsive portrait/Fold landscape layouts without changing bridge behavior.
 
 ### Added
