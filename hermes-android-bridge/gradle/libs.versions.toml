@@ -2,7 +2,7 @@
 agp = "8.3.0"
 kotlin = "1.9.22"
 ktor = "2.3.7"
-coroutines = "1.7.3"
+coroutines = "1.11.0"
 gson = "2.10.1"
 junit = "4.13.2"
 mockk = "1.13.10"
