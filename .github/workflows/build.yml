@@ -105,7 +105,9 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           if ! gh release view latest-build >/dev/null 2>&1; then
-            gh release create latest-build --title "Latest Build" --prerelease --notes "Continuous unsigned debug build. Do not use as a store release."
+            gh release create latest-build --target "$GITHUB_SHA" --title "Latest Build" --prerelease --notes "Continuous unsigned debug build. Do not use as a store release."
+          else
+            gh api --method PATCH "repos/$GH_REPO/git/refs/tags/latest-build" -f sha="$GITHUB_SHA" -F force=true >/dev/null
           fi
           gh release edit latest-build --title "Latest Build" --prerelease --notes "Auto-built from main at $GITHUB_SHA. This is an unsigned debug build for private testing, not a store submission."
           gh release upload latest-build dist/*.apk dist/SHA256SUMS --clobber
