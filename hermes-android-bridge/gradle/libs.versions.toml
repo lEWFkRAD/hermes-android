@@ -6,7 +6,7 @@ coroutines = "1.11.0"
 gson = "2.14.0"
 junit = "4.13.2"
 mockk = "1.14.11"
-okhttp = "4.12.0"
+okhttp = "5.5.0"
 robolectric = "4.16.1"
 
 [libraries]
