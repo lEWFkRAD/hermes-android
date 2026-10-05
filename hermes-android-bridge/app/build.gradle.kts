@@ -60,6 +60,8 @@ android {
 
     packaging {
         resources {
+            // Netty 4.2 native variants repeat license notices; retain every notice.
+            merges += "META-INF/license/**"
             excludes += setOf(
                 "META-INF/INDEX.LIST",
                 "META-INF/io.netty.versions.properties",
