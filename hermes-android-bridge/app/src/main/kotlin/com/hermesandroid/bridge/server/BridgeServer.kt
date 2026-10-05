@@ -11,7 +11,7 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 
 object BridgeServer {
-    private var server: ApplicationEngine? = null
+    private var server: EmbeddedServer<NettyApplicationEngine, NettyApplicationEngine.Configuration>? = null
 
     // Per-IP auth throttle — defends the 0.0.0.0:8765 bind against
     // brute-forcing the pairing code (see AuthRateLimiter).
