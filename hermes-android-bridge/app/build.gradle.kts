@@ -60,7 +60,11 @@ android {
 
     packaging {
         resources {
+            // Netty 4.2 native variants repeat license notices; retain every notice.
+            merges += "META-INF/license/**"
             excludes += setOf(
+                // GraalVM native-image metadata is unused by the Android runtime.
+                "META-INF/native-image/io.netty/**",
                 "META-INF/INDEX.LIST",
                 "META-INF/io.netty.versions.properties",
                 "META-INF/DEPENDENCIES",
