@@ -1,3 +1,12 @@
+<!-- project-home:start -->
+![Hermes Android concept banner](site/hero.png)
+
+**[Hermes Android project homepage](https://lewfkrad.github.io/hermes-android/)** · [Documentation](https://github.com/lEWFkRAD/hermes-android/blob/main/docs/install.md)
+
+Connect an Android device to Hermes through a permission-based bridge and remote toolset.
+
+<!-- project-home:end -->
+
 # hermes-android
 
 Give your AI agent hands. Remote Android device control for [hermes-agent](https://github.com/NousResearch/hermes-agent).

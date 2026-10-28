@@ -1,0 +1,8 @@
+{
+  "source": "OpenAI built-in imagegen",
+  "kind": "Concept illustration",
+  "sha256": "d14d2b3d89ffe2fdddd699555d4acd65ab35d11911fe6c02ddc7272b07bb5c32",
+  "prompts": [
+    "Use case: ads-marketing. Asset: polished public open-source homepage/repository banner, exactly wide 2:1 (2048x1024). Create a premium editorial physical illustration for Hermes Android, a paired bridge that connects Hermes with an Android device. Exact prominent title \"Hermes Android\" in beautifully typeset pale ivory editorial lettering on the left; small subtitle only \"A bridge to your Android device\". At right, a sculptural modern handset made from matte deep navy aluminum and smoky lavender glass stands on a low architectural plinth. Three carefully arranged mint-green ceramic connection nodes form a small physical bridge from a quiet desktop-shaped slab to the handset, with a tasteful amber pairing token connecting two matching sockets. The handset face is an abstract composition of rounded glass blocks suggesting accessibility controls; it is not a product screenshot. Palette navy #071321, subtle lavender #C69BFF, restrained mint #66F4B7 and warm amber accents, dramatic but soft studio light, tactile surfaces, convincing shadows, quiet luxurious industrial design. Keep all text clearly readable and within 10% margins. No real app interfaces, contacts, chats, private data, IP addresses, robots, Android mascot, third-party logos, padlocks, encryption/security guarantees, neon circuits, generic AI brain, fake tiny text, watermark, or extra slogans."
+  ]
+}
