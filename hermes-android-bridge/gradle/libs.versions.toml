@@ -1,11 +1,11 @@
 [versions]
 agp = "8.11.1"
 kotlin = "2.4.21"
-ktor = "3.6.0"
+ktor = "3.6.1"
 coroutines = "1.11.0"
-gson = "2.14.0"
+gson = "2.15.0"
 junit = "4.13.2"
-mockk = "1.14.11"
+mockk = "1.14.12"
 okhttp = "4.12.0"
 robolectric = "4.17"
 
